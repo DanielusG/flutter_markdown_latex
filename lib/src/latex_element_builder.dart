@@ -45,7 +45,7 @@ class LatexElementBuilder extends MarkdownElementBuilder {
       clipBehavior: Clip.antiAlias,
       child: Math.tex(
         text,
-        onErrorFallback: onErrorFallback,
+        onErrorFallback: onErrorFallback ?? Math.defaultOnErrorFallback,
         textStyle: textStyle,
         mathStyle: mathStyle,
         textScaleFactor: textScaleFactor,
