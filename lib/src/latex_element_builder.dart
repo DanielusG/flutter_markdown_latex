@@ -16,7 +16,7 @@ class LatexElementBuilder extends MarkdownElementBuilder {
   /// The text scale factor to apply to the text.
   final double? textScaleFactor;
 
-  final Widget Function(FlutterMathException)? onErrorFallback;
+  final Widget Function(FlutterMathException exception, String text)? onErrorFallback;
 
   @override
   Widget visitElementAfterWithContext(
@@ -45,7 +45,7 @@ class LatexElementBuilder extends MarkdownElementBuilder {
       clipBehavior: Clip.antiAlias,
       child: Math.tex(
         text,
-        onErrorFallback: onErrorFallback ?? Math.defaultOnErrorFallback,
+        onErrorFallback: (exception) => onErrorFallback?.call(exception, text) ?? Math.defaultOnErrorFallback(exception),
         textStyle: textStyle,
         mathStyle: mathStyle,
         textScaleFactor: textScaleFactor,
